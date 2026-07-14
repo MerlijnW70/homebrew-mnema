@@ -1,0 +1,53 @@
+name: install-test
+
+# Prove the published formula actually installs and runs on a real Mac (the runner is Apple
+# Silicon, so this exercises the aarch64-apple-darwin bottle URL + checksum end to end).
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "Formula/**"
+      - ".github/workflows/install-test.yml"
+
+jobs:
+  brew-install:
+    runs-on: macos-latest # Apple Silicon (arm64)
+    steps:
+      - name: Tap and install from the published formula
+        run: |
+          set -euxo pipefail
+          brew tap MerlijnW70/mnema
+          brew install MerlijnW70/mnema/mnema
+          brew list --versions mnema
+
+      - name: Binaries are on PATH and runnable
+        run: |
+          set -euxo pipefail
+          command -v mnema
+          command -v mnema-server
+          mnema-server --help
+
+      - name: keygen smoke — a 64-hex passphrase
+        run: |
+          set -euxo pipefail
+          key="$(mnema keygen)"
+          echo "keygen length: ${#key}"
+          [ "${#key}" -eq 64 ]
+
+      - name: End-to-end — remember/recall into a fresh nested dir (the v0.1.3 fix)
+        run: |
+          set -euxo pipefail
+          export MNEMA_KEY="$(mnema keygen)"
+          store="$RUNNER_TEMP/fresh/nested/dir/t.store"   # directory does NOT exist yet
+          id="$(mnema remember "$store" open 'hello from a brew-installed mnema')"
+          echo "remembered id=$id"
+          mnema remember "$store" private 'a private secret'
+          mnema stats "$store"
+          mnema recall "$store" 5 hello
+          test -f "$store"   # the store (and its parent dirs) were created
+
+      - name: brew test (runs the formula's own test block)
+        run: brew test mnema
+
+      - name: brew audit (non-fatal — style only)
+        run: brew audit --strict mnema || true

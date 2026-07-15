@@ -1,28 +1,28 @@
 class Mnema < Formula
   desc "Local, encrypted memory layer for AI agents — never forgets, never leaks to the cloud"
   homepage "https://github.com/MerlijnW70/mnema"
-  version "0.1.5"
+  version "0.1.6"
   license any_of: ["MIT", "Apache-2.0"]
 
   on_macos do
     on_arm do
-      url "https://github.com/MerlijnW70/mnema/releases/download/v0.1.5/mnema-v0.1.5-aarch64-apple-darwin.tar.gz"
-      sha256 "51eb5c5a7d81c10e42259ec9191b6eddf85626c8c55328f12b717baea654d3b7"
+      url "https://github.com/MerlijnW70/mnema/releases/download/v0.1.6/mnema-v0.1.6-aarch64-apple-darwin.tar.gz"
+      sha256 "fb172235435a94d756afaaefdd1db30458e7154ba9b1edd75c56d7c38364479b"
     end
     on_intel do
-      url "https://github.com/MerlijnW70/mnema/releases/download/v0.1.5/mnema-v0.1.5-x86_64-apple-darwin.tar.gz"
-      sha256 "539f84b8b06ed051438b96f279068177a1ab91408bdb071457f6a5ab817959d2"
+      url "https://github.com/MerlijnW70/mnema/releases/download/v0.1.6/mnema-v0.1.6-x86_64-apple-darwin.tar.gz"
+      sha256 "58c97c1ec1725c1ffa73fe25d25e844339bdbf29cad80d3b19e278f1d3fd78a6"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/MerlijnW70/mnema/releases/download/v0.1.5/mnema-v0.1.5-aarch64-unknown-linux-musl.tar.gz"
-      sha256 "8a19afed9645ec38c982f8d3cee39c83216d986ca9d2d76871efca5df048e81d"
+      url "https://github.com/MerlijnW70/mnema/releases/download/v0.1.6/mnema-v0.1.6-aarch64-unknown-linux-musl.tar.gz"
+      sha256 "456c464909e6e4a71288c2f477349298dd7e3cb4cf2e0acac20b4bee4357f619"
     end
     on_intel do
-      url "https://github.com/MerlijnW70/mnema/releases/download/v0.1.5/mnema-v0.1.5-x86_64-unknown-linux-musl.tar.gz"
-      sha256 "ec20658dd44ea45e79106341a3cb524b38263bbaf8ddfeaa180e956fb042d537"
+      url "https://github.com/MerlijnW70/mnema/releases/download/v0.1.6/mnema-v0.1.6-x86_64-unknown-linux-musl.tar.gz"
+      sha256 "654135134867737e6545c4098f3fe7a5ac27a665e2db582e774c4de28967ffa1"
     end
   end
 
